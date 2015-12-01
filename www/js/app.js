@@ -7,29 +7,6 @@
 // It is completely optional and not required.
 // Note the reference that includes it in the index.html file.
 
-
-
-/*var push = PushNotification.init({ "android": {"senderID": "276638088511"},
-    "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
-
-push.on('registration', function(data) {
-    console.log("Storing registration ID");
-    window.localStorage.setItem("pushID", data.registrationId);
-});
-
-push.on('notification', function(data) {
-    // data.message,
-    // data.title,
-    // data.count,
-    // data.sound,
-    // data.image,
-    // data.additionalData
-});
-
-push.on('error', function(e) {
-    console.log(e.message);
-});
-*/
 /*jslint browser:true, devel:true, white:true, vars:true */
 /*global $:false, intel:false app:false, dev:false, cordova:false */
 
@@ -41,9 +18,9 @@ var snapper = new Snap({
     element: document.getElementById('content')
 });
 
-snapper.on('ignore', function(){
+/*snapper.on('ignore', function(){
   snapper.open('left');
-});
+});*/
 
 //window.app = window.app || {};
 
@@ -72,10 +49,12 @@ function myEventHandler() {
 
 // ...additional event handlers here...
 function menuEvent() {
-    "use strict" ;
     
-    snapper.open('left');
-    /*$('#snap-drawer').css('display', 'block');*/
+    if( snapper.state().state=="left" ){
+        snapper.close();
+    } else {
+        snapper.open('left');
+    }
 }
 
 function addUserEvent() {
@@ -121,23 +100,23 @@ function setUpDrawer(){
     var filename = url.substring(url.lastIndexOf('/')+1);
     
     if (filename != "index.html") {
-        $(".snap-drawers").html('<div class="snap-drawer snap-drawer-left">\
-                <div>\
-                    <h4>CRU is Coo</h4>\
-                    <ul>\
-                        <li><a href="../events/events.html">Events</a></li>\
-                        <li><a href="../resources/resources.html">Resources</a></li>\
-                        <li><a href="../missions/missions.html">Missions</a></li>\
-                        <li><a href="../teams/teams.html">Teams</a></li>\
-                        <li><a href="../cg/cg.html">Community Groups</a></li>\
-                        <li><a href="../rides/rides.html">Rides</a></li>\
-                    </ul>\
-                </div>\
-            </div>');
+        $(".snap-drawers").html('<div class="snap-drawer snap-drawer-left">' +
+                '<div>' +
+                    '<h4>CRU is Coo</h4>' +
+                    '<ul>' +
+                        '<li><a href="../events/events.html">Events</a></li>' +
+                        '<li><a href="../resources/resources.html">Resources</a></li>' +
+                        '<li><a href="../missions/missions.html">Missions</a></li>' +
+                        '<li><a href="../teams/teams.html">Teams</a></li>' +
+                        '<li><a href="../cg/cg.html">Community Groups</a></li>' +
+                        '<li><a href="../rides/rides.html">Rides</a></li>' +
+                    '</ul>' +
+                '</div>' +
+            '</div>');
         
-        $("#toolbar").html('<a href="#" id="open-left" data-snap-ignore="true">&#9776;</a>\
-                <h1 class="align-center">CRU Baby</h1>\
-                <br>' + $("#toolbar").html());
+        $("#toolbar").html('<a href="#" id="open-left" data-snap-ignore="true">&#9776;</a>' +
+                '<h1 class="align-center">CRU Baby</h1>' +
+                '<br>' + $("#toolbar").html());
     }
         
 
