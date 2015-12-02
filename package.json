@@ -6,6 +6,7 @@
     "test": "node test/all.js"
   },
   "dependencies": {
+    "cordova": "^5.4.0",
     "test": "^0.6.0"
   }
 }

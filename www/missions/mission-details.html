@@ -34,16 +34,44 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 
+        <script type="text/javascript" src="../js/calendar-feature.js"></script>
+        <script type="text/javascript" src="../js/mission-page-setup.js"></script>
+
         <script type="text/javascript" src="../cordova.js"></script>
+
         <script type="text/javascript" src="../js/index.js"></script>
-        <link rel="stylesheet" href="../css/events_list.css">
-        <script type="text/javascript" src="../js/get-add-populate-ministries.js"></script>
+        
+        <link rel="stylesheet" href="../css/app.css" />
+        <link rel="stylesheet" href="../css/snap.css" />
+        <link rel="stylesheet" href="../css/demo.css" /> 
 
     </head>
     <body>
-        <h2>Select Ministry</h2>
-      <ul id = "list_of_ministries"> 
-      </ul>
-        
+        <div class="snap-drawers">
+            <div class="snap-drawer snap-drawer-left">
+                <div>
+                    <h4>CRU is Coo</h4>
+                    <ul>
+                        <li><a href="../events/events.html">Events</a></li>
+                        <li><a href="events/testEvent1.html">Resources</a></li>
+                        <li><a href="#">Missions</a></li>
+                        <li><a href="#">Teams</a></li>
+                        <li><a href="#">Community Groups</a></li>
+                        <li><a href="#">Rides</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="snap-content">
+            <div id="toolbar">
+                <a href="#" id="open-left" data-snap-ignore="true">&#9776;</a>
+                
+                <h1 id="name_of_event" ></h1>
+                <img id="image_of_event" src="" style="width:304px;height:228px;"> 
+                <p id="description_of_event"></p>
+                <button id="wasae">Add this to your calendar</button>
+            </div>
+
+        </div>
     </body>
 </html>

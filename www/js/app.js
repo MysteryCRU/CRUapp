@@ -59,10 +59,10 @@ function menuEvent() {
 
 function addUserEvent() {
     var push = PushNotification.init({ 
-        android: {senderID: "276638088511"},
+        android: {senderID: "276638088511", forceShow:true},
         ios: {alert: "true", badge: true, sound: 'false'}, 
         windows: {} } );
-
+    
     push.on('registration', function(data) {
         console.log("Storing registration ID");
         $("#userInfo").html("registered id: " + data.registrationId);
@@ -77,6 +77,7 @@ function addUserEvent() {
         // data.image,
         // data.additionalData
         console.log("officially push notified: " + data.message);
+        alert("recieved notification"+data.message);
     });
 
     push.on('error', function(e) {
@@ -91,10 +92,13 @@ function postNewUser() {
         {
             token: window.localStorage.getItem("pushID"),  
             type: device.platform
-        });
+        },
+          function(data, status, xhr) {
+        console.log("post status: " + status);
+    });
 }
 
-function setUpDrawer(){
+/*function setUpDrawer(){
 
     var url = window.location.pathname;
     var filename = url.substring(url.lastIndexOf('/')+1);
@@ -121,7 +125,6 @@ function setUpDrawer(){
         
 
 }
-
 /*    $.post(serverURL + "users",
     {
         name: "DonaldDuck"

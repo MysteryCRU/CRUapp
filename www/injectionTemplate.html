@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>CRU App</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <!-- see http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag -->
+        <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+        <style>
+            /* following two viewport lines are equivalent to meta viewport statement above, and is needed for Windows */
+            /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html and http://dev.w3.org/csswg/css-device-adapt/ */
+            @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }          @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
+            @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }                   @viewport { user-zoom: fixed ; min-zoom: 100% ; }
+            /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+        </style>
+        
+        <script src="js/template/jquery.min.js"></script>
+        <script src="js/template/jquery.scrollzer.min.js"></script>
+        <script src="js/template/jquery.scrolly.min.js"></script>
+       <script src="js/injection.js"></script>
+        <script>
+            $(document).ready(function(){
+                injectHtml();
+            });
+        </script>
+        
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="css/template/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        
+        
+        
+    </head>
+    <body>
+        <section id="header"></section>
+        <p>cody was here</p>
+        
+      <!-- Scripts -->
+			<script src="js/template/skel.min.js"></script>
+			<script src="js/template/util.js"></script>
+			<!--[if lte IE 8]><script src="js/template/ie/respond.min.js"></script><![endif]-->
+			<script src="js/template/main.js"></script>
+
+            <script src="cordova.js"></script>          <!-- "Phantom" cordova.js required for projects that use plugins -->
+    
+        <!--  <script src="js/index.js"></script> -->
+        <script src="js/app.js"></script>           <!-- for your event code, see README and file comments for details -->
+        <script src="js/init-app.js"></script>      <!-- for your init code, see README and file comments for details -->
+        <script src="js/init-dev.js"></script>     <!-- normalizes device and document ready events, see file for details --> 
+    </body>
+</html>

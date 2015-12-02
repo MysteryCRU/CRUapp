@@ -28,20 +28,57 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 
         <script type="text/javascript" src="../js/calendar-feature.js"></script>
+        <script type="text/javascript" src="../js/settingup_event_page.js"></script>
+
         <script type="text/javascript" src="../cordova.js"></script>
 
         <script type="text/javascript" src="../js/index.js"></script>
 
+        <link rel="stylesheet" href="../css/app.css" />
+        <link rel="stylesheet" href="../css/snap.css" />
+        <link rel="stylesheet" href="../css/demo.css" />    
+    
+    <!-- include the Snap.js file in a script tag -->
+        <script type="text/javascript" src="../js/snap.js"></script>
     </head>
     <body>
-        <h1>TestEvent1</h1>
+        <div class="snap-drawers">
+            <div class="snap-drawer snap-drawer-left">
+                <div>
+                    <h4>CRU is Coo</h4>
+                    <ul>
+                        <li><a href="../events/events.html">Events</a></li>
+                        <li><a href="events/testEvent1.html">Resources</a></li>
+                        <li><a href="#">Missions</a></li>
+                        <li><a href="#">Teams</a></li>
+                        <li><a href="#">Community Groups</a></li>
+                        <li><a href="#">Rides</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+         <div id="content" class="snap-content">
+            <div id="toolbar">
+                <a href="#" id="open-left" data-snap-ignore="true">&#9776;</a>
+                
+        <h1 id="name_of_event" ></h1>
+        <img id="image_of_event" src="" style="width:304px;height:228px;"> 
+        <p id="description_of_event"></p>
         <button id="wasae">Add this to your calendar</button>
+                 </div>
+
+        </div>
+        <!--  <script src="js/index.js"></script> -->
+    <script src="../js/app.js"></script>           <!-- for your event code, see README and file comments for details -->
+    <script src="../js/init-app.js"></script>      <!-- for your init code, see README and file comments for details -->
+    <script src="../js/init-dev.js"></script>  
     </body>
+    
 </html>
