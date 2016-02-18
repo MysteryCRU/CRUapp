@@ -2,11 +2,11 @@ var utils = angular.module('starter.controllers.utils', []);
 
 // creates a list of constants that are accessible anywhere
 utils.constant('constants', {
-    'BASE_SERVER_URL' : 'http://ec2-52-91-208-65.compute-1.amazonaws.com:3001/api/',
-    'CAMPUSES_CONFIG' : 'campuses',
-    'MY_RIDES_RIDER' : 'myRidesRider',
-    'MY_RIDES_DRIVER' : 'myRidesDriver',
-    'SELECTED_RIDE' : 'selectedRide',
+    'BASE_SERVER_URL': 'http://ec2-52-91-208-65.compute-1.amazonaws.com:3001/api/',
+    'CAMPUSES_CONFIG': 'campuses',
+    'MY_RIDES_RIDER': 'myRidesRider',
+    'MY_RIDES_DRIVER': 'myRidesDriver',
+    'SELECTED_RIDE': 'selectedRide',
     'RIDER_SIGNUP_BACK_TO_START': -2,
     'RIDER_VIEW_DRIVER_BACK_TO_START': -1,
     'DRIVER_SIGNUP_BACK_TO_START': -1,
@@ -32,9 +32,8 @@ utils.factory('$localStorage', ['$window', function($window, constants) {
         removeObject: function(key) {
             $window.localStorage.removeItem(key);
         }
-    }
+    };
 }]);
-
 
 // utitity methods for making http requests/posts
 utils.factory('req', ['$window', '$http', function($window, $http) {
@@ -55,23 +54,23 @@ utils.factory('req', ['$window', '$http', function($window, $http) {
          * values - the array of values to be passed in the query
          */
         buildQueryUrl: function(url, varName, values) {
-            
+
             varName += '[]=';
-            
+
             if (values.length > 0) {
                 url += '?' + varName + '' + values[0]._id;
                 for (var i = 1; i < values.length; ++i) {
-                    url += '&' + varName + '' + values[i]._id; 
+                    url += '&' + varName + '' + values[i]._id;
                 }
             }
-            
+
             return url;
         }
-    }
+    };
 }]);
 
 // various convenience methods that are used in various parts of the app
-utils.factory('convenience' , [ function () {
+utils.factory('convenience' , [function() {
     return {
         contains: function(value, array) {
             for (val in array) {
@@ -79,7 +78,7 @@ utils.factory('convenience' , [ function () {
                     return true;
                 }
             }
-            
+
             return false;
         }
     };
