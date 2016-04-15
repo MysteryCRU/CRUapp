@@ -55,17 +55,17 @@ eventCtrl.controller('EventsCtrl', function($scope, $location, req, $localStorag
 
 
         if (mins === '' || mins === [] || typeof mins === 'undefined') {
-            url = constants.BASE_SERVER_URL + 'event/list';
+            url = constants.BASE_SERVER_URL + 'events/';
             req.get(url , success, err);
         } else {
-            url = constants.BASE_SERVER_URL + 'event/find?Content-Type: application/x-www-form-urlencoded';
+            url = constants.BASE_SERVER_URL + 'events/search';
             minsIds = [];
             for (var i = 0; i < mins.length; i++) {
                 minsIds.push(mins[i]._id);
             }
 
             var queryParams = {
-                'parentMinistries': {'$in': minsIds}
+                'ministries': {'$in': minsIds}
             };
             req.post(url, queryParams, success, err);
         }
@@ -161,7 +161,7 @@ eventCtrl.controller('EventsCtrl', function($scope, $location, req, $localStorag
 })
 
 .controller('EventCtrl', function($scope, $stateParams, $location, $localStorage, $cordovaCalendar, $ionicPopup, $cordovaInAppBrowser, req, convenience, constants) {
-    var url = constants.BASE_SERVER_URL + 'event/' + $stateParams.eventId;
+    var url = constants.BASE_SERVER_URL + 'events/' + $stateParams.eventId;
     var val;
 
     var success = function(value) {

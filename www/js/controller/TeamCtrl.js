@@ -1,7 +1,7 @@
 var teams = angular.module('TeamCtrl', []);
 
 teams.controller('TeamCtrl', function($scope, $location, req, constants, convenience, $localStorage) {
-	var url = constants.BASE_SERVER_URL + 'ministryteam/list';
+	var url = constants.BASE_SERVER_URL + 'ministryteams/';
 	var mins = $localStorage.getObject(constants.CAMPUSES_CONFIG).ministries;
     
 	var success = function(data) {
@@ -40,13 +40,13 @@ teams.controller('TeamCtrl', function($scope, $location, req, constants, conveni
     var err = convenience.defaultErrorCallback('TeamDetailCtrl',
 		'Could not retrieve the selected minstry team from the server');
     
-    var minUrl = constants.BASE_SERVER_URL + 'ministry/';
+    var minUrl = constants.BASE_SERVER_URL + 'ministries/';
     var minSuccess = function(data) {
         var min = data.data;
         $scope.min = min.name;
     };
     
-    var leaderUrl = constants.BASE_SERVER_URL + 'user/';
+    var leaderUrl = constants.BASE_SERVER_URL + 'users/';
     var leaderSuccess = function(data) {
         var leader = data.data;
         $scope.leader = leader.name;
@@ -80,7 +80,7 @@ teams.controller('TeamCtrl', function($scope, $location, req, constants, conveni
         req.get(minUrl, minSuccess, err);
     };
     
-    var url = constants.BASE_SERVER_URL + 'ministryteam/' + teamId;
+    var url = constants.BASE_SERVER_URL + 'ministryteams/' + teamId;
     
     req.get(url, success, err);
     

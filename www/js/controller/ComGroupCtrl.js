@@ -66,17 +66,6 @@ var parseDate = function(eventDate) {
 };
 
 groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constants, req) {
-    /* populating with dummy data to be changed when the db actually contains these groups
-    $scope.groups = [
-        { _id: 1, leader: "Donald Trumpcard", time: "1pm - 4pm", days: "Mon, Wed, Fri" },
-        { _id: 1, leader: "Cody Beers", time: "5pm - 8pm", days: "Mon, Wed, Fri" },
-        { _id: 1, leader: "Willy Wonka", time: "8am - 11am", days: "Tues, Thurs" },
-        { _id: 1, leader: "Codemaster Cody", time: "4pm - 6pm", days: "Mon, Tues, Wed, Thurs" },
-        { _id: 1, leader: "Some Dude", time: "10am - 2pm", days: "Wed, Fri" },
-        { _id: 1, leader: "Janet Jackson", time: "1pm - 4pm", days: "Mon, Wed, Fri" },
-        { _id: 1, leader: "Giovanni Paulo Murillo", time: "9am - 12pm", days: "Tues, Fri" },
-        { _id: 1, leader: "Katy Perry (dream gurl)", time: "10pm - 12am", days: "Mon, Tues, Wed, Thurs, Fri" },
-    ];*/
     $scope.days = dayArr;
     var date = new Date();
     var hours = date.getHours();
@@ -106,7 +95,7 @@ groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constant
         var com;
         var date;
         
-        var userURL = constants.BASE_SERVER_URL + 'user/';
+        var userURL = constants.BASE_SERVER_URL + 'users/';
         
         for (idx = 0; idx < comList.length; idx++) {
             com = comList[idx];
@@ -118,7 +107,7 @@ groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constant
         $scope.groups = comGroups;
     };
     
-    var comURL = constants.BASE_SERVER_URL + 'communitygroup/list';
+    var comURL = constants.BASE_SERVER_URL + 'communitygroups/';
     
     req.get(comURL, comSuccess, err($location));
     
@@ -163,7 +152,7 @@ groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constant
         var com = data.data;
         var date;
         
-        var userURL = constants.BASE_SERVER_URL + 'user/';
+        var userURL = constants.BASE_SERVER_URL + 'users/';
 
         date = parseDate(new Date(com.meetingTime));
         req.get(userURL + com.leaders[0], leaderSuccess(com, date, comGroups, $scope), err($location));
@@ -171,7 +160,7 @@ groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constant
         //$scope.group = comGroups[0];
     };
     
-    var comURL = constants.BASE_SERVER_URL + 'communitygroup/' + id;
+    var comURL = constants.BASE_SERVER_URL + 'communitygroups/' + id;
     
     req.get(comURL, comSuccess, err($location));
     

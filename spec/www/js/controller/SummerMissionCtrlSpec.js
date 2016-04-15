@@ -40,7 +40,7 @@ describe('MissionCtrl', function() {
 
 	    location = $location;
 	    httpBackend = $httpBackend;
-	    getList = httpBackend.when('GET', constants.BASE_SERVER_URL + 'summermission/list')
+	    getList = httpBackend.when('GET', constants.BASE_SERVER_URL + 'summermissions/')
 	    	.respond([{test: 1}, {test: 2}, {test: 3}]);
 	}));
 
@@ -50,7 +50,7 @@ describe('MissionCtrl', function() {
    	});
 
    	it('gets a list of summer missions', function() {
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/list');
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/');
    		controller();
    		httpBackend.flush();
 
@@ -58,7 +58,7 @@ describe('MissionCtrl', function() {
    	});
 
    	it('sets the placeholder image', function() {
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/list');
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/');
    		controller();
    		httpBackend.flush();
 
@@ -69,7 +69,7 @@ describe('MissionCtrl', function() {
 
    	it('does not overwrite existing images', function() {
    		getList.respond([{test: 1, image: 'test'}, {test: 2, image: 'test'}]);
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/list');
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/');
    		controller();
    		httpBackend.flush();
 
@@ -79,7 +79,7 @@ describe('MissionCtrl', function() {
    	});
 
    	it('navigates to the correct mission page', function() {
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/list');
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/');
    		
    		controller();
    		spyOn(location, 'path');
@@ -92,7 +92,7 @@ describe('MissionCtrl', function() {
 
    	it('navigates to the error page when 500 received', function() {
 		getList.respond(500, '');
-		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/list');
+		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/');
 		
 		spyOn(location, 'path');
 		controller();
@@ -105,7 +105,7 @@ describe('MissionCtrl', function() {
 		var date = new Date();
 		getList.respond([{startDate: date}]);
 
-		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/list');
+		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/');
    		controller();
    		httpBackend.flush();
 
@@ -143,7 +143,7 @@ describe('MissionCtrl', function() {
 
 	    location = $location;
 	    httpBackend = $httpBackend;
-	    mission = httpBackend.when('GET', constants.BASE_SERVER_URL + 'summermission/' + fakeId)
+	    mission = httpBackend.when('GET', constants.BASE_SERVER_URL + 'summermissions/' + fakeId)
 	    	.respond({test: 1});
 	}));
 
@@ -153,7 +153,7 @@ describe('MissionCtrl', function() {
    	});
 
    	it('gets an event from the server', function() {
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/' + fakeId);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/' + fakeId);
    		controller();
    		httpBackend.flush();
 
@@ -163,7 +163,7 @@ describe('MissionCtrl', function() {
    	it('formats the event start date', function() {
    		const start = new Date(1995, 11, 17);
    		mission.respond({startDate: start});
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/' + fakeId);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/' + fakeId);
 
    		controller();
    		httpBackend.flush();
@@ -174,7 +174,7 @@ describe('MissionCtrl', function() {
    	it('formats the event end date', function() {
    		const end = new Date(2001, 6, 21);
    		mission.respond({endDate: end});
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/' + fakeId);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/' + fakeId);
 
    		controller();
    		httpBackend.flush();
@@ -183,7 +183,7 @@ describe('MissionCtrl', function() {
    	});
 
    	it('sets the placeholder image', function() {
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/' + fakeId);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/' + fakeId);
    		controller();
    		httpBackend.flush();
 
@@ -193,7 +193,7 @@ describe('MissionCtrl', function() {
    	it('does not overwrite existing images', function() {
    		const img = '/img/test.png';
    		mission.respond({image: img});
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/' + fakeId);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/' + fakeId);
 
    		controller();
    		httpBackend.flush();
@@ -203,7 +203,7 @@ describe('MissionCtrl', function() {
 
    	it('navigates to the error page when 500 received', function() {
 		mission.respond(500, '');
-		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/' + fakeId);
+		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/' + fakeId);
 		
 		spyOn(location, 'path');
 		controller();
@@ -214,7 +214,7 @@ describe('MissionCtrl', function() {
 
 	it('opens the in app browser', function() {
 		spyOn(ciab, 'open');
-		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermission/' + fakeId);
+		httpBackend.expectGET(constants.BASE_SERVER_URL + 'summermissions/' + fakeId);
    		controller();
    		httpBackend.flush();
 

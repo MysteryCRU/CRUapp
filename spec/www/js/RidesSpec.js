@@ -30,7 +30,7 @@ describe('RidesCtrl', function() {
 		    });
 	    };
         
-	    getList = httpBackend.when('GET', constants.BASE_SERVER_URL + 'ride/list').respond([{test: 1, test: 2, test: 3}]);
+	    getList = httpBackend.when('GET', constants.BASE_SERVER_URL + 'rides/').respond([{test: 1, test: 2, test: 3}]);
 	}));
 
 

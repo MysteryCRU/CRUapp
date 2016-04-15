@@ -490,7 +490,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
         $location.path('/app/error');
     };
 
-    var url = constants.BASE_SERVER_URL + 'ride/' + driverID;
+    var url = constants.BASE_SERVER_URL + 'rides/' + driverID;
     //gets the riders information
     req.get(url, success, err);
 
@@ -535,7 +535,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
         var myriders = [];
         var passengers = data.data.passengers;
         console.log(passengers);
-        var passUrl = constants.BASE_SERVER_URL + 'passenger/';
+        var passUrl = constants.BASE_SERVER_URL + 'rides/' + rideID + 'passengers/';
 
         var passSuccess = function(data) {
             var pass = data.data;
@@ -563,7 +563,8 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
         $location.path('/app/error');
     };
 
-    var url = constants.BASE_SERVER_URL + 'ride/' + driverID;
+    // not sure about this change
+    var url = constants.BASE_SERVER_URL + 'rides/' + rideID + '/' + driverID;
     //get the passenger information from the given driver
     req.get(url, success, err);
 

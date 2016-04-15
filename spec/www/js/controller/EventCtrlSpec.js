@@ -42,7 +42,7 @@ describe('EventsCtrl', function() {
 
 	    location = $location;
 	    httpBackend = $httpBackend;
-	    getList = httpBackend.when('GET', constants.BASE_SERVER_URL + 'event/list').respond([{test: 1, test: 2, test: 3}]);
+	    getList = httpBackend.when('GET', constants.BASE_SERVER_URL + 'events').respond([{test: 1, test: 2, test: 3}]);
 	}));
 
 	afterEach(function() {
@@ -53,7 +53,7 @@ describe('EventsCtrl', function() {
 	it('is not empty when no ministries have been chosen', function() {
 		// because the events page is wrapped in a view enter event
 		// must broadcast the event to ensure the code is run.
-		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/list');
+		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events');
 		controller();
 		rootScope.$broadcast('$ionicView.enter');
 		httpBackend.flush();
@@ -63,7 +63,7 @@ describe('EventsCtrl', function() {
 
 	it('navigates to the error page when 500 received', function() {
 		getList.respond(500, '');
-		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/list');
+		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events');
 		spyOn(location, 'path');
 
 		controller();
@@ -74,7 +74,7 @@ describe('EventsCtrl', function() {
 	});
 
 	it('navigates to the proper page', function() {
-		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/list');
+		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events');
 		controller();
 		rootScope.$broadcast('$ionicView.enter');
 		httpBackend.flush();
@@ -117,7 +117,7 @@ describe('EventCtrl', function() {
 			});
 		};
 
-		getEvent = httpBackend.when('GET', constants.BASE_SERVER_URL + 'event/' + id).respond({test: 'test'});
+		getEvent = httpBackend.when('GET', constants.BASE_SERVER_URL + 'events/' + id).respond({test: 'test'});
 	}));
 
 	afterEach(function() {
@@ -126,7 +126,7 @@ describe('EventCtrl', function() {
    	});
 
    	it('contains the event requested by the page', function() {
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		controller();
    		httpBackend.flush();
 
@@ -135,7 +135,7 @@ describe('EventCtrl', function() {
 
    	it('navigates to the error page on error', function() {
    		getEvent.respond(404, '');
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		
    		controller();
    		spyOn(location, 'path');
@@ -145,7 +145,7 @@ describe('EventCtrl', function() {
    	});
 
    	it('navigates to the correct driver page', function() {
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		controller();
    		spyOn(location, 'path');
    		httpBackend.flush();
@@ -159,7 +159,7 @@ describe('EventCtrl', function() {
    		var testId = 'myId';
    		getEvent.respond({_id: testId});
 
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		controller();
    		httpBackend.flush();
 
@@ -170,7 +170,7 @@ describe('EventCtrl', function() {
    		var testId = 'myId';
    		getEvent.respond({_id: testId});
 
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		controller();
    		httpBackend.flush();
 
@@ -181,7 +181,7 @@ describe('EventCtrl', function() {
    		var testId = 'myId';
    		getEvent.respond({_id: testId});
 
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		localStorage.setObject(constants.MY_RIDES_RIDER, [{rideId: testId}]);
    		controller();
    		httpBackend.flush();
@@ -193,7 +193,7 @@ describe('EventCtrl', function() {
    		var testId = 'myId';
    		getEvent.respond({_id: testId});
 
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		localStorage.setObject(constants.MY_RIDES_DRIVER, [{rideId: testId}]);
    		controller();
    		httpBackend.flush();
@@ -205,7 +205,7 @@ describe('EventCtrl', function() {
    		var testId = 'myId';
    		getEvent.respond({_id: testId});
 
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		controller();
    		httpBackend.flush();
 
@@ -221,7 +221,7 @@ describe('EventCtrl', function() {
    		var testId = 'myId';
    		getEvent.respond({_id: testId});
 
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		controller();
    		httpBackend.flush();
 
@@ -237,7 +237,7 @@ describe('EventCtrl', function() {
    		var testId = 'myId';
    		getEvent.respond({_id: testId});
 
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		controller();
    		httpBackend.flush();
 
@@ -250,7 +250,7 @@ describe('EventCtrl', function() {
    		var testId = 'myId';
    		getEvent.respond({_id: testId});
 
-   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'event/' + id);
+   		httpBackend.expectGET(constants.BASE_SERVER_URL + 'events/' + id);
    		controller();
    		httpBackend.flush();
 

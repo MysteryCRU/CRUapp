@@ -2,12 +2,16 @@ var min = angular.module('starter.controllers.min', ["PushModule"]);
 
 min.controller('MinCtrl', function($scope, $location, $ionicHistory, req, $localStorage, $ionicPopup, selectedCampuses, constants, pushService) {
 
-    var url = constants.BASE_SERVER_URL + "ministry/find";
-    var queryParams = {
-        'campuses': {$in: Object.keys(selectedCampuses.getCampusesObject())}
-    };
+    var url = constants.BASE_SERVER_URL + "ministries/search";
+    
+    var or = [];
+    selectedCampuses.getCampuses().forEach(function(c) {
+        or.push({'campus': c._id});
+    });
+    var queryParams = {'campus': {$or: or}};
+
     var success = function(data) {
-        //makes the objects "checkable"
+        // makes the objects "checkable"
         for (var i = 0; i < data.data.length; ++i) {
             data.data[i].checked = false;
             
