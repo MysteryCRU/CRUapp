@@ -138,6 +138,16 @@ cruMocks.factory('convenience' , ['$location', function($location) {
                 console.error(err);
                 $location.path('/app/error');
             };
+        },
+        
+        //Get the JSON object to send the the server from a location string
+        getLocationObject: function(locationStr) {
+            return {country: "USA"};
+        },
+        
+        //Takes a location object and returns the formated address
+        formatLocation: function(location) {
+            return "USA";
         }
     };
 }]);

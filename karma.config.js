@@ -15,14 +15,16 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test-main.js',
+      
       {pattern: 'www/lib/ionic/js/ionic.bundle.js', included: true},
-      {pattern: 'bower_components/angular/angular.js', included: true},
+      'test-main.js',
+      //{pattern: 'bower_components/angular/angular.js', included: true},
       {pattern: 'spec/lib/*.js', included: true},
       {pattern: 'spec/mocks/*.js', included: true},
       {pattern: 'www/js/*.js', included: true},
       {pattern: 'www/js/**/*.js', included: true},
-      {pattern: 'spec/**/*Spec.js', included: false},
+      {pattern: 'spec/**/*Spec.js', included: false}
+
     ],
 
 

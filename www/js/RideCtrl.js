@@ -182,7 +182,8 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
             };
 
             var addErr = function(xhr) {
-                console.log('add passenger error');
+                //if there is an error (ie 404, 500, etc) redirect to the error page
+                $location.path('/app/error');
             };
 
             var addUrl = constants.BASE_SERVER_URL + 'ride/addPassenger';
@@ -216,7 +217,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
 })
 
 //list of drivers to choose from
-.controller('ChooseDriverCtrl', function($scope, $location, $ionicHistory, req, $localStorage, allEvents, constants, $stateParams, $ionicModal) {
+.controller('ChooseDriverCtrl', function($scope, $location, $ionicHistory, req, $localStorage, allEvents, constants, $stateParams, $ionicModal, convenience) {
     //id from the url
     var rideID = $stateParams.rideId;
 
@@ -249,11 +250,12 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
         var filterSuccess = function(data) {
             var rides = data.data;
             mydrivers = [];
-            /*TODO change mydrivers based on data given back*/
+            /*TODO change mydrivers based on data given back (number seats)*/
             for (var i = 0; i < rides.length; i++) {
                 ride = rides[i];
 
                 var eventDate = parseDate(new Date(ride.time));
+                var eventLocation = convenience.formatLocation(ride.location);
 
                 mydrivers.push({
                     id: ride._id,
@@ -262,7 +264,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
                     phone: ride.driverNumber,
                     time: eventDate.time,
                     date: eventDate.date,
-                    pickup: ride.location.country
+                    pickup: eventLocation
                 });
             }
 
@@ -313,7 +315,8 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
             ride = rides[i];
 
             var eventDate = parseDate(new Date(ride.time));
-
+            var rideLocation = convenience.formatLocation(ride.location);
+            
             mydrivers.push({
                 id: ride._id,
                 event_id: ride.event,
@@ -321,7 +324,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
                 phone: ride.driverNumber,
                 time: eventDate.time,
                 date: eventDate.date,
-                pickup: ride.location.country
+                pickup: rideLocation
             });
 
         }
@@ -356,7 +359,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
     //id from the url
     var tempID = $stateParams.rideId;
 
-    $scope.checkRider = function(name, phonenumber, location, seats, leaving, triptype) {
+    $scope.checkRider = function(name, phonenumber, location, seats, leaving, triptype, convenience) {
 
         //change the triptype to fit the server
         triptype = changeTriptype(triptype);
@@ -364,7 +367,6 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
         
 
         //check if rider is valid by name in DB
-        /* TODO: change this valid statement */
         var valid;
         
         var validSuccess = function(data) {
@@ -428,6 +430,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
                 //create the post call to create the driver in the DB
                 var url = constants.BASE_SERVER_URL + 'ride/create';
                 var gcm_id = pushService.getToken();
+                var locationObj = convenience.getLocationObject(location);
                 if (typeof gcm_id === 'undefined') {
                     gcm_id = "empty";
                 }
@@ -439,7 +442,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
                     direction: triptype,
                     seats: seats,
                     /* TODO fill in the location */
-                    //location: location,
+                    location: locationObj,
                     time: leaving
                 };
                 
@@ -455,7 +458,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
             phone: phonenumber
         };
         var validUrl = constants.BASE_SERVER_URL + 'user/find';
-        //not working
+        //TODO: not working
         req.post(validUrl, validData, validSuccess, validErr);
         
         
@@ -463,7 +466,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
 
 })
 
-.controller('DriverViewCtrl', function($scope, $location, $ionicHistory, req, $localStorage, allEvents, constants, $stateParams) {
+.controller('DriverViewCtrl', function($scope, $location, $ionicHistory, req, $localStorage, allEvents, constants, $stateParams, convenience) {
     //id from the url
     var rideID = $stateParams.rideId;
     var driverID = $stateParams.driverId;
@@ -472,6 +475,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
         var driverInfo = data.data;
 
         var eventDate = parseDate(new Date(driverInfo.time));
+        var eventLocation = convenience.formatLocation(driverInfo.location);
 
         var mydriver = {
             id: driverID,
@@ -479,7 +483,7 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
             phone: driverInfo.driverNumber,
             time: eventDate.time,
             date: eventDate.date,
-            pickup: driverInfo.location.country
+            pickup: eventLocation
         };
 
         $scope.driver = mydriver;
@@ -518,8 +522,6 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
             riding.splice(idx, 1);
             $localStorage.setObject(constants.MY_RIDES_RIDER, riding);
         }
-
-        /* TODO: (push) notify riders that the driver canceled */
 
         $ionicHistory.goBack(constants.DRIVER_VIEW_RIDERS_BACK_TO_START);
     };
@@ -575,7 +577,6 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
             $localStorage.setObject(constants.MY_RIDES_DRIVER, driving);
         }
 
-        /* TODO: delete driver from database */
         var success = function(data) {
             console.log("delted successfully");
         };
@@ -590,7 +591,6 @@ ride.controller('RidesCtrl', function($scope, $location, $ionicHistory, $ionicPo
         
         //drops the driver from the database
         req.post(url, toDrop, success, fail);
-        /* TODO: (push) notify riders that the driver canceled */
 
         $ionicHistory.goBack(constants.DRIVER_VIEW_RIDERS_BACK_TO_START);
     };

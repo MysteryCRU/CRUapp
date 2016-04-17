@@ -193,7 +193,6 @@ groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constant
     };
     
     $scope.signupForGroup = function(groupSignupData) {
-        console.log("Got here");
         var name = groupSignupData.name;
         var email = groupSignupData.email;
         var phone = groupSignupData.phone;
@@ -210,8 +209,8 @@ groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constant
             ". Please contact me by email: " + email + " or phone: " + phone; 
         
         //TODO change hardcoded phone to this: $scope.leaderPhone
-        //currently Cody's phone #
-        var phoneToSend = "7074943342";
+        //currently Cody's Google Voice number for testing
+        var phoneToSend = "8052257931";
 
         $cordovaSms
           .send(phoneToSend, message, options)
@@ -227,7 +226,7 @@ groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constant
           }, function(error) {
             // An error occurred
           });
-        console.log("Got here");
+        
         $scope.closeSignupModal();
     };
 });
