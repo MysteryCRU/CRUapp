@@ -152,10 +152,6 @@ utils.factory('api', ['req', 'constants', function(req, constants) {
         deletePassenger: function(driverID, passengerID, success, err) {
             var url = constants.BASE_SERVER_URL + 'rides/' + driverID + '/passengers/' + passengerID;
             req.delete(url, success, err);
-        },
-        getFilteredArticles: function(params, success, err) {
-            var url = constants.BASE_SERVER_URL + 'resources/find';
-            req.post(url, params, success, err);
         }
     };
 }]);

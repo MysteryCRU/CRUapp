@@ -32,7 +32,7 @@ var sortArticles = function(unsorted) {
 //req used for making request
 //constants are used for the defines in the util.js file
 //$location is used for rerouting to a different page
-articles.controller('articles_controller',function($scope, $ionicModal, api, req, constants,
+articles.controller('articles_controller',function($scope, $ionicModal, req, constants,
  convenience, $location, $cordovaInAppBrowser) {
     convenience.showLoadingScreen('Loading Articles');
 
@@ -91,6 +91,8 @@ articles.controller('articles_controller',function($scope, $ionicModal, api, req
 
     // submit the search results
     $scope.search = function() {
+        url = constants.BASE_SERVER_URL + 'resource/find';
+
         // regex (?i: makes it case insensitive)
         var queryParams = {};
 
@@ -102,7 +104,7 @@ articles.controller('articles_controller',function($scope, $ionicModal, api, req
             queryParams['author'] = {'$regex':  '(?i:' + $scope.articleSearchData.author + ')'};
         }
 
-        api.getFilteredArticles(queryParams, successGettingArticles, failureGettingArticles);
+        req.post(url, queryParams, successGettingArticles, failureGettingArticles);
         console.log('SEARCHING' + $scope.articleSearchData.title);
 
         //Set up the title of the page
@@ -157,17 +159,9 @@ articles.controller('articles_controller',function($scope, $ionicModal, api, req
         }
 
         convenience.hideLoadingScreen();
-        
-        var tempTags;
-        var tags = [];
-        for (var artidx = 0; artidx < articles.length; artidx++) {
-            tempTags = articles[artidx].tags;
-            for (var i = 0; i < tempTags.length; ++i) {
-                if (tags.indexOf(tempTags[i]) == -1) {
-                    tempTags[i].checked = false;
-                    tags.push(tempTags[i]);
-                }
-            }
+        tags = data['data'].tags;
+        for (var i = 0; i < tags.length; ++i) {
+            tags[i].checked = false;
         }
         $scope.tags = tags;
     };
