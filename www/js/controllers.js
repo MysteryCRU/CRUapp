@@ -47,7 +47,8 @@ module.controller('AppCtrl', function(pushService, $rootScope, $scope, $ionicMod
     // Triggered in the login modal to close it
     $scope.closeLogin = function() {
         $scope.modal.hide();
-        $scope.modal.remove();
+        $scope.loginData.username = "";
+        $scope.loginData.password = "";
     };
 
     // Open the login modal
@@ -60,14 +61,22 @@ module.controller('AppCtrl', function(pushService, $rootScope, $scope, $ionicMod
 
         // Simulate a login delay. Remove this and replace with your login
         // code if using a login system
-        $timeout(function() 
+        $timeout(function()
         {
             $scope.closeLogin();
+
+            var alertPopup = $ionicPopup.alert(
+            {
+                title: '<span class="bold">Error!</span>',
+                template: 'Community Group Leader Login not yet supported.'
+            });
+
         }, 1000);
+
     };
 
     /**
-    * Set up push notification 
+    * Set up push notification
     */
     $rootScope.$on('$cordovaPushV5:notificationReceived', pushService.onNotificationRecieved);//);
     //error happened
@@ -75,7 +84,7 @@ module.controller('AppCtrl', function(pushService, $rootScope, $scope, $ionicMod
 
 
 
-  //set up when the application is ready 
+  //set up when the application is ready
   $ionicPlatform.ready(function(){
     // call to register automatically upon device ready
 
