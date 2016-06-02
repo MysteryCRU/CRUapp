@@ -2,7 +2,7 @@ var utils = angular.module('starter.controllers.utils', []);
 
 // creates a list of constants that are accessible anywhere
 utils.constant('constants', {
-    'BASE_SERVER_URL': 'http://ec2-52-91-208-65.compute-1.amazonaws.com:3003/api/',
+    'BASE_SERVER_URL': 'http://ec2-54-89-121-154.compute-1.amazonaws.com:3003/api/',
     'PLACEHOLDER_IMAGE': 'img/cru-logo.jpg',
     'PERSON_IMAGE': 'img/person.png',
     'GCM_SENDER_ID': '276638088511',
