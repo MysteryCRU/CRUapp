@@ -60,7 +60,7 @@ var parseDate = function(eventDate) {
         eventDate.getDate() + ', ' + eventDate.getFullYear();
     var day = dayArr[eventDate.getDay()];  
     
-    if (day != 'undefined') {
+    if (typeof day != 'undefined') {
         day = day.name;
     }
     
@@ -95,19 +95,19 @@ groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constant
     
         
     var comSuccess = function(data) {
+        console.log(data);
         var comList = data.data;
         var idx;
         comGroups = [];
         var com;
         var date;
         
-        var userURL = constants.BASE_SERVER_URL + 'users/';
         
         for (idx = 0; idx < comList.length; idx++) {
             com = comList[idx];
             date = parseDate(new Date(com.meetingTime));
-            
-			api.getUser(com.leaders[0], leaderSuccess(com, date, comGroups, $scope), err($location));
+            console.log(idx);
+			api.getUser(com.leaders[0]._id, leaderSuccess(com, date, comGroups, $scope), err($location));
         }
 
         $scope.groups = comGroups;
@@ -207,7 +207,7 @@ groups.controller('GroupCtrl', function($scope, $location, $ionicModal, constant
         var date;
 
         date = parseDate(new Date(com.meetingTime));
-        api.getUser(com.leaders[0], leaderSuccess(com, date, comGroups, $scope), err($location));
+        api.getUser(com.leaders[0]._id, leaderSuccess(com, date, comGroups, $scope), err($location));
     };
     
 	api.getCommunityGroup(id, comSuccess, err($location));

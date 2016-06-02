@@ -29,6 +29,7 @@ min.controller('MinCtrl', function($scope, $location, $ionicHistory, api, $local
                 data.data[i].description = 'Sorry, but there is no available description for this ministry.';
             }
         }
+        console.log(data.data);
         $scope.ministries = data.data;
         convenience.hideLoadingScreen();
     };
@@ -44,7 +45,7 @@ min.controller('MinCtrl', function($scope, $location, $ionicHistory, api, $local
     * the header has changed from the previous item.
     */
     $scope.setupHeader = function(ministry) {
-
+        console.log(ministry); 
         showHeader = currentHeader !== $scope.campuses[ministry.campuses[0]];
         currentHeader = $scope.campuses[ministry.campuses[0]];
         return showHeader;
